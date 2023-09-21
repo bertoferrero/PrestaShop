@@ -404,7 +404,13 @@ abstract class PaymentModuleCore extends Module
                 die(Tools::displayError($error));
             }
             if (!$secure_key) {
-                $message .= '<br />' . $this->trans('Warning: the secure key is empty, check your payment account before validation', [], 'Admin.Payment.Notification');
+                if(empty($message)){
+                    $message = '';
+                }
+                else{
+                    $message .= '<br />';
+                }
+                $message .= $this->trans('Warning: the secure key is empty, check your payment account before validation', [], 'Admin.Payment.Notification');
             }
             // Optional message to attach to this order
             if (!empty($message)) {
